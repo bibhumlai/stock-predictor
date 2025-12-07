@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  stock-app:
+    build: .
+    image: spark-genai-streamlit:latest
+    container_name: stock-app
+    ports:
+      - "8502:8501"
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: streamlit run streamlit_app.py
+    environment:
+      - SPARK_LOCAL_IP=127.0.0.1
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+      - STREAMLIT_SERVER_HEADLESS=true
+      - STREAMLIT_SERVER_ENABLE_CORS=false
+      - STREAMLIT_SERVER_ENABLE_XSRF_PROTECTION=false
